@@ -1,0 +1,28 @@
+services:
+
+  # load test MySQL
+  sysbench:
+    image: severalnines/sysbench:latest
+    container_name: sysbench
+    networks:
+      - monitor_test
+
+  # load test HTTP
+  k6:
+    image: grafana/k6:latest
+    container_name: k6
+    volumes:
+      - ./k6-script.js:/scripts/k6-script.js
+    networks:
+      - monitor_test
+
+  stress-ng:
+    image: polinux/stress-ng
+    container_name: stress-ng
+    networks:
+      - monitor_test
+
+networks:
+  monitori_test:
+    external: true
+    name: monitoring
