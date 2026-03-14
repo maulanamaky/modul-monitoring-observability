@@ -16,7 +16,7 @@ services:
     networks:
       - monitoring
 
-  flask-app:
+  simple-app:
     image: simple-app:v1.0
     build: ./simple-app
     container_name: flask-app

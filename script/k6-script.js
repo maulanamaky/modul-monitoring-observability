@@ -3,15 +3,15 @@ import { sleep, check } from 'k6';
 
 export const options = {
   stages: [
-    { duration: '30s', target: 10 },   // ramp up ke 10 user
+    { duration: '30s', target: 10 },   // request ke 10 user
     { duration: '1m',  target: 10 },   // tahan 1 menit
-    { duration: '30s', target: 50 },   // ramp up ke 50 user
+    { duration: '30s', target: 50 },   // request ke 50 user
     { duration: '1m',  target: 50 },   // tahan 1 menit
-    { duration: '30s', target: 0  },   // ramp down
+    { duration: '30s', target: 0  },   // turun request perlahan
   ],
 };
 
-const BASE_URL = __ENV.APP_URL || 'http://flask-app:5000';
+const BASE_URL = __ENV.APP_URL || 'http://simple-app:5000';
 
 export default function () {
   const r1 = http.get(`${BASE_URL}/`);

@@ -6,7 +6,6 @@ import mysql.connector
 from flask import Flask, jsonify, request
 from prometheus_client import Counter, Histogram, Gauge, generate_latest, CONTENT_TYPE_LATEST
 
-# ── Logging setup ──────────────────────────────────────────────────────────────
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s [%(levelname)s] %(message)s'
@@ -15,7 +14,6 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-# ── Prometheus metrics ─────────────────────────────────────────────────────────
 REQUEST_COUNT = Counter(
     'app_request_total',
     'Total HTTP requests',
@@ -36,7 +34,6 @@ ACTIVE_USERS = Gauge(
     'Simulated active users'
 )
 
-# ── DB connection ──────────────────────────────────────────────────────────────
 def get_db():
     return mysql.connector.connect(
         host=os.getenv('MYSQL_HOST', 'mysql'),
@@ -66,7 +63,6 @@ def init_db():
             time.sleep(3)
     logger.error("Failed to initialize database after 10 attempts")
 
-# ── Routes ─────────────────────────────────────────────────────────────────────
 @app.route('/')
 def index():
     start = time.time()
@@ -94,7 +90,6 @@ def index():
 
 @app.route('/slow')
 def slow():
-    """Endpoint lambat — bagus untuk demo latency di Grafana"""
     start = time.time()
     delay = random.uniform(0.5, 3.0)
     time.sleep(delay)
@@ -105,7 +100,6 @@ def slow():
 
 @app.route('/error')
 def error():
-    """Endpoint error — bagus untuk demo error rate di Grafana"""
     REQUEST_COUNT.labels(method='GET', endpoint='/error', status='500').inc()
     logger.error("GET /error — simulated error triggered")
     return jsonify({"error": "Simulated internal server error"}), 500
@@ -118,7 +112,6 @@ def health():
 def metrics():
     return generate_latest(), 200, {'Content-Type': CONTENT_TYPE_LATEST}
 
-# ── Main ───────────────────────────────────────────────────────────────────────
 if __name__ == '__main__':
     init_db()
     app.run(host='0.0.0.0', port=5000)

@@ -16,6 +16,7 @@ services:
     networks:
       - monitor_test
 
+  # load test Node
   stress-ng:
     image: polinux/stress-ng
     container_name: stress-ng

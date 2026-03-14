@@ -10,7 +10,6 @@ clients:
 
 scrape_configs:
 
-  # Log dari semua Docker containers
   - job_name: docker-containers
     docker_sd_configs:
       - host: unix:///var/run/docker.sock
@@ -19,10 +18,7 @@ scrape_configs:
       - source_labels: ['__meta_docker_container_name']
         regex: '/(.*)'
         target_label: 'container'
-      - source_labels: ['__meta_docker_container_image']
-        target_label: 'image'
 
-  # Log sistem OS
   - job_name: syslog
     static_configs:
       - targets: ['localhost']
@@ -31,10 +27,3 @@ scrape_configs:
           host: vm-ubuntu
           __path__: /var/log/syslog
 
-  - job_name: auth-log
-    static_configs:
-      - targets: ['localhost']
-        labels:
-          job: auth
-          host: vm-ubuntu
-          __path__: /var/log/auth.log

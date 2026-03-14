@@ -17,7 +17,7 @@ scrape_configs:
     static_configs:
       - targets: ['mysql-exporter:9104']
 
-  - job_name: 'flask-app'
+  - job_name: 'simple-app'
     static_configs:
-      - targets: ['flask-app:5000']
+      - targets: ['simple-app:5000']
     metrics_path: '/metrics'
