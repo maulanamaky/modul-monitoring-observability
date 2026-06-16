@@ -2,7 +2,7 @@
 --
 
 <div align="center">
-  <img src="./assets-image/Scenario Monitoring & Observability.jpg" alt="Scenario Monitoring & Observability">
+  <img src="./assets/Scenario Monitoring & Observability.jpg" alt="Scenario Monitoring & Observability">
 </div>
 
 ## 1. Teori Singkat
@@ -64,7 +64,7 @@ sudo apt instal openssh-server -y
 Klik bagian **Settings** ➡️ **Expert** ➡️ **Network** ➡️ **Port Forwarding**.
 
 <div align="center">
-  <img src="./assets-image/Vbox-Port-Forward.png" alt="Virtual Box Port Forwarding Section">
+  <img src="./assets/Vbox-Port-Forward.png" alt="Virtual Box Port Forwarding Section">
 </div>
 
 Di dalam port forwarding ada tabel: 
@@ -640,7 +640,7 @@ Sekarang, kita punya 3 dashboard.
 Rasanya jika tidak di testing cukup membosankan, tidak ada metric atau parameter berwarna merah…
 
 <div align="center">
-  <img src="./assets-image/Scenario-Testing-Image.jpg" alt="Scenario Testing">
+  <img src="./assets/Scenario-Testing-Image.jpg" alt="Scenario Testing">
 </div>
 
 1. Akses VM anda dan file **docker-compose.testing.yml**
